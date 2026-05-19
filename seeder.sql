@@ -111,7 +111,7 @@ INSERT INTO Episode_Professional (episode_id, professional_id) VALUES
 -- -----------------------------------------------------
 -- Episode <-> Equipment
 -- -----------------------------------------------------
-INSERT INTO EPisode_Equipment (episode_id, equipment_id) VALUES
+INSERT INTO Episode_Equipment (episode_id, equipment_id) VALUES
 (1, 1),
 (2, 5),
 (3, 1),
