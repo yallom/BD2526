@@ -177,10 +177,13 @@ CREATE TABLE Episode_Equipment (
 -- ---------------------------
 
 CREATE TABLE Alert (
-	id 			INT AUTO_INCREMENT NOT NULL,
-    entity 		ENUM('patient','professional','equipment','location','procedure','episode') NOT NULL,
-    reason 		ENUM('full','broken'),
-    message 	VARCHAR(100) NOT NULL,
-    timestamp   DATETIME DEFAULT CURRENT_TIMESTAMP,
+	id 					INT AUTO_INCREMENT NOT NULL,
+    entity_type 		ENUM('patient','professional','equipment','location','procedure','episode') NOT NULL,
+    entity_id			INT NOT NULL,
+    severity			ENUM('info','warning','critical') DEFAULT 'warning',
+    reason 				VARCHAR(100),
+    message 			VARCHAR(255) NOT NULL,
+    resolved_at			DATETIME DEFAULT NULL,
+    timestamp   		DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
