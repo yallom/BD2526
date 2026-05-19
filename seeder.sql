@@ -28,7 +28,7 @@ INSERT INTO Professional (name, email, phone, type, specialty) VALUES
 INSERT INTO Equipment (serial_number, brand, model, category, state, use_time, last_repair, next_repair) VALUES
 ('SN-001', 'Philips', 'MX450',    'monitor',    'available',   1200, '2025-01-10', '2026-01-10'),
 ('SN-002', 'GE',      'Optima',   'mri',        'available',   3400, '2025-03-15', '2026-03-15'),
-('SN-003', 'Siemens', 'SC7000',   'ventilator', 'maintenance',  800, '2025-06-01', '2026-06-01'),
+('SN-003', 'Siemens', 'SC7000',   'ventilator', 'available',  800, '2025-06-01', '2026-06-01'),
 ('SN-004', 'Mindray', 'DC-70',    'ultrasound', 'available',    500, '2025-09-20', '2026-09-20'),
 ('SN-005', 'Dräger',  'Infinity', 'monitor',    'available',   2100, '2025-11-05', '2026-11-05');
 -- IDs will be 1..5
@@ -39,9 +39,9 @@ INSERT INTO Equipment (serial_number, brand, model, category, state, use_time, l
 INSERT INTO Location (number, floor, state) VALUES
 (101, 1, 'available'),
 (102, 1, 'available'),
-(201, 2, 'unavailable'),
+(201, 2, 'available'),
 (202, 2, 'available'),
-(301, 3, 'maintenance');
+(301, 3, 'available');
 -- IDs will be 1..5
 
 -- -----------------------------------------------------
@@ -111,7 +111,7 @@ INSERT INTO Episode_Professional (episode_id, professional_id) VALUES
 -- -----------------------------------------------------
 -- Episode <-> Equipment
 -- -----------------------------------------------------
-INSERT INTO EPisode_Equipment (episode_id, equipment_id) VALUES
+INSERT INTO Episode_Equipment (episode_id, equipment_id) VALUES
 (1, 1),
 (2, 5),
 (3, 1),
