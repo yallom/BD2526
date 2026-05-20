@@ -69,6 +69,7 @@ CREATE TABLE Equipment (
 -- -----------------------------------------------------
 CREATE TABLE Location (
     id      INT AUTO_INCREMENT NOT NULL,
+    type    ENUM('room','operating_room','emergency','examination')
     number  INT,
     floor   INT,
     state   ENUM('available', 'unavailable', 'maintenance', 'inoperable') NOT NULL,
