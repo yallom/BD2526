@@ -27,7 +27,7 @@ BEGIN
     IF oxygen    < 80                     THEN RETURN GREATEST(4, score); END IF;
     IF sistolic  < 60  OR sistolic  > 200 THEN RETURN GREATEST(4, score); END IF;
     IF temp      < 33  OR temp      > 41  THEN RETURN GREATEST(4, score); END IF;
-    IF breathing < 6   OR breathing > 35  THEN RETURN GREATEST(4, score); END IF;~
+    IF breathing < 6   OR breathing > 35  THEN RETURN GREATEST(4, score); END IF;
 
     -- Cada parametro conta até 4 pntos para o total
 
