@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE update_equipment(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE update_equipment(
     IN p_id             INT,
     IN p_serial_number  VARCHAR(100),
     IN p_brand          VARCHAR(100),
@@ -11,6 +11,7 @@ CREATE PROCEDURE update_equipment(
     IN p_last_repair    DATETIME,
     IN p_next_repair    DATETIME
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

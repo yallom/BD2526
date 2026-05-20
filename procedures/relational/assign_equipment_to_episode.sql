@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE assign_equipment_to_episode(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE assign_equipment_to_episode(
     IN p_episode_id   INT,
     IN p_equipment_id INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE get_patient(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE get_patient(
     IN p_id             INT,
     IN p_name           VARCHAR(255),
     IN p_email          VARCHAR(255),
@@ -13,6 +13,7 @@ CREATE PROCEDURE get_patient(
     IN p_birthdate_from DATETIME,
     IN p_birthdate_to   DATETIME
 )
+SQL SECURITY DEFINER
 BEGIN
     SELECT * FROM Patient
     WHERE

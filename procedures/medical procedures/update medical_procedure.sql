@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE update_medical_procedure(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE update_medical_procedure(
     IN p_id            INT,
     IN p_location_id   INT,
     IN p_patient_id    INT,
@@ -8,6 +8,7 @@ CREATE PROCEDURE update_medical_procedure(
     IN p_type          VARCHAR(100),
     IN p_duration      INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

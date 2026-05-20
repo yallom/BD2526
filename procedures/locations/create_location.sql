@@ -1,10 +1,11 @@
 DELIMITER $$
 
-CREATE PROCEDURE create_location(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE create_location(
     IN p_number INT,
     IN p_floor  INT,
     IN p_state  ENUM('available', 'unavailable', 'maintenance', 'inoperable')
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF p_state IS NULL THEN

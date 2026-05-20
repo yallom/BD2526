@@ -1,12 +1,13 @@
 DELIMITER $$
 
-CREATE PROCEDURE create_medical_procedure(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE create_medical_procedure(
     IN p_location_id INT,
     IN p_patient_id  INT,
     IN p_time        DATETIME,
     IN p_type        VARCHAR(100),
     IN p_duration    INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF p_location_id IS NOT NULL AND NOT EXISTS (

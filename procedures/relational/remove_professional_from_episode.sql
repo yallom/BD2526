@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE remove_professional_from_episode(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE remove_professional_from_episode(
     IN p_episode_id      INT,
     IN p_professional_id INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

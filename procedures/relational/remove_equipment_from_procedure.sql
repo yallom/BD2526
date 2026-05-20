@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE remove_equipment_from_procedure(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE remove_equipment_from_procedure(
     IN p_procedure_id INT,
     IN p_equipment_id INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

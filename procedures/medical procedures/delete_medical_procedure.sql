@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE delete_medical_procedure(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE delete_medical_procedure(
     IN p_id   INT,
     IN p_hard BOOLEAN
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

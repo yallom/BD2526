@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE create_equipment(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE create_equipment(
     IN p_serial_number VARCHAR(100),
     IN p_brand         VARCHAR(100),
     IN p_model         VARCHAR(100),
@@ -10,6 +10,7 @@ CREATE PROCEDURE create_equipment(
     IN p_last_repair   DATETIME,
     IN p_next_repair   DATETIME
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF p_state IS NULL THEN

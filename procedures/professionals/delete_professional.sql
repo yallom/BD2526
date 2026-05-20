@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE delete_professional(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE delete_professional(
     IN p_id   INT,
     IN p_hard BOOLEAN   -- FALSE = soft delete, TRUE = hard delete
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

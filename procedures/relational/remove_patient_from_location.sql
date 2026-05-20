@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE remove_patient_from_location(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE remove_patient_from_location(
     IN p_location_id INT,
     IN p_patient_id  INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

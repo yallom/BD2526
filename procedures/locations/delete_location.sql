@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE delete_location(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE delete_location(
     IN p_id   INT,
     IN p_hard BOOLEAN
 )
+SQL SECUIRTY DEFINER
 BEGIN
 
     IF NOT EXISTS (

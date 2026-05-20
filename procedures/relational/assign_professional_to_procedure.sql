@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE assign_professional_to_procedure(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE assign_professional_to_procedure(
     IN p_procedure_id    INT,
     IN p_professional_id INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

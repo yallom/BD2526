@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE get_professional(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE get_professional(
     IN p_id          INT,
     IN p_name        VARCHAR(255),
     IN p_email       VARCHAR(255),
@@ -8,6 +8,7 @@ CREATE PROCEDURE get_professional(
     IN p_type        VARCHAR(100),
     IN p_specialty   VARCHAR(100)
 )
+SQL SECURITY DEFINER
 BEGIN
 
     SELECT *

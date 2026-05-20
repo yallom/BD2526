@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE get_equipment(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE get_equipment(
     IN p_id              INT,
     IN p_serial_number   VARCHAR(100),
     IN p_brand           VARCHAR(100),
@@ -13,6 +13,7 @@ CREATE PROCEDURE get_equipment(
     IN p_next_repair_from DATETIME,
     IN p_next_repair_to   DATETIME
 )
+SQL SECURITY DEFINER
 BEGIN
 
     SELECT *

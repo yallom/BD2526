@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE update_patient(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE update_patient(
     IN p_id         INT,
     IN p_name       VARCHAR(255),
     IN p_email      VARCHAR(255),
@@ -11,6 +11,7 @@ CREATE PROCEDURE update_patient(
     IN p_weight     INT,
     IN p_blood_type ENUM('A-','A+','B-','B+','AB-','AB+','O-','O+')
 )
+SQL SECURITY DEFINER
 BEGIN
     -- Verificar ID
     IF NOT EXISTS (SELECT 1 FROM Patient WHERE id = p_id) THEN

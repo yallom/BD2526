@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE create_patient(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE create_patient(
     IN p_name       VARCHAR(255),
     IN p_email      VARCHAR(255),
     IN p_phone      VARCHAR(50),
@@ -10,6 +10,7 @@ CREATE PROCEDURE create_patient(
     IN p_weight     INT,
     IN p_blood_type ENUM('A-','A+','B-','B+','AB-','AB+','O-','O+')
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF p_name IS NULL OR TRIM(p_name) = '' THEN

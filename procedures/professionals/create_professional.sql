@@ -1,12 +1,13 @@
 DELIMITER $$
 
-CREATE PROCEDURE create_professional(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE create_professional(
     IN p_name       VARCHAR(255),
     IN p_email      VARCHAR(255),
     IN p_phone      VARCHAR(50),
     IN p_type       VARCHAR(100),
     IN p_specialty  VARCHAR(100)
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF p_name IS NULL OR TRIM(p_name) = '' THEN
