@@ -43,4 +43,3 @@ for /R procedures %%f in (*.sql) do (
 )
 
 echo Generated %OUTPUT% successfully.
-pause

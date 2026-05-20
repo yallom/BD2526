@@ -1,6 +1,7 @@
 DELIMITER $$
 CREATE PROCEDURE create_patient(
     IN p_name       VARCHAR(255),
+    IN p_address    VARCHAR(255),
     IN p_email      VARCHAR(255),
     IN p_phone      VARCHAR(50),
     IN p_nif        VARCHAR(20),
@@ -24,6 +25,10 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Blood type is required.';
     END IF;
 
+    IF p_nif IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'NIF is required.';
+    END IF;
+
     IF p_height IS NOT NULL AND p_height NOT BETWEEN 30 AND 300 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Height must be between 30 and 300 cm.';
     END IF;
@@ -40,7 +45,7 @@ BEGIN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid phone format.';
 	END IF;
 
-	IF p_nif IS NOT NULL AND p_nif NOT REGEXP '^[0-9]{9}$' THEN
+	IF p_nif NOT REGEXP '^[0-9]{9}$' THEN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'NIF must be 9 digits.';
 	END IF;
 
@@ -52,8 +57,8 @@ BEGIN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Birthdate is outside acceptable range.';
 	END IF;
 
-    INSERT INTO Patient (name, email, phone, nif, birthdate, gender, height, weight, blood_type)
-    VALUES (p_name, p_email, p_phone, p_nif, p_birthdate, p_gender, p_height, p_weight, p_blood_type);
+    INSERT INTO Patient (name, address, email, phone, nif, birthdate, gender, height, weight, blood_type)
+    VALUES (p_name, p_address, p_email, p_phone, p_nif, p_birthdate, p_gender, p_height, p_weight, p_blood_type);
 
     SELECT * FROM Patient WHERE id = LAST_INSERT_ID();
     

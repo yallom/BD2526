@@ -8,9 +8,10 @@ USE hospital_db;
 CREATE TABLE Patient (
     id            INT AUTO_INCREMENT  NOT NULL,
     name          VARCHAR(255) NOT NULL,
+    address       VARCHAR(255),
     email         VARCHAR(255),
     phone         VARCHAR(50),
-    nif           VARCHAR(20),
+    nif           VARCHAR(20) NOT NULL,
     birthdate     DATETIME,
     gender        ENUM('male', 'female') NOT NULL,
     height        INT,
@@ -23,7 +24,8 @@ CREATE TABLE Patient (
     PRIMARY KEY (id),
     UNIQUE (email),
     UNIQUE (phone),
-    UNIQUE (nif)
+    UNIQUE (nif),
+    CHECK (status BETWEEN 1 AND 5)
 );
 
 -- -----------------------------------------------------
@@ -32,7 +34,6 @@ CREATE TABLE Patient (
 CREATE TABLE Professional (
     id            INT AUTO_INCREMENT  NOT NULL,
     name          VARCHAR(255) NOT NULL,
-    email         VARCHAR(255),
     phone         VARCHAR(50),
     type          VARCHAR(100),
     specialty     VARCHAR(100),
@@ -40,8 +41,18 @@ CREATE TABLE Professional (
     updated_at	  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at    DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
-    UNIQUE (email),
     UNIQUE (phone)
+);
+
+-- -----------------------------------------------------
+-- Table: Professional Email
+-- -----------------------------------------------------
+
+CREATE TABLE Professional_Email (
+    email               VARCHAR(255) NOT NULL,
+    professional_id     INT NOT NULL,
+    PRIMARY KEY (email),
+    FOREIGN KEY (professional_id) REFERENCES Professional(id) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -69,13 +80,15 @@ CREATE TABLE Equipment (
 -- -----------------------------------------------------
 CREATE TABLE Location (
     id      INT AUTO_INCREMENT NOT NULL,
+    type    ENUM('room','operating_room','emergency_room','examination_room'),
     number  INT,
     floor   INT,
     state   ENUM('available', 'unavailable', 'maintenance', 'inoperable') NOT NULL,
     created_at	  DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at	  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at    DATETIME DEFAULT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE(floor, number)
 );
 
 -- -----------------------------------------------------
@@ -84,6 +97,8 @@ CREATE TABLE Location (
 CREATE TABLE Location_Patient (
     location_id     INT NOT NULL,
     patient_id  INT NOT NULL,
+    arrived_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	left_at DATETIME,
     PRIMARY KEY (location_id, patient_id),
     FOREIGN KEY (location_id)    REFERENCES Location(id)    ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
@@ -147,7 +162,8 @@ CREATE TABLE Episode (
     updated_at	  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at    DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE SET NULL
+    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE,
+    CHECK (status BETWEEN 1 AND 5)
 );
 
 -- -----------------------------------------------------

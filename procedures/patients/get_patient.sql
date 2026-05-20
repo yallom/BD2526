@@ -2,6 +2,7 @@ DELIMITER $$
 CREATE PROCEDURE get_patient(
     IN p_id             INT,
     IN p_name           VARCHAR(255),
+    IN p_address        VARCHAR(255),
     IN p_email          VARCHAR(255),
     IN p_phone          VARCHAR(50),
     IN p_nif            VARCHAR(20),
@@ -18,7 +19,8 @@ BEGIN
     WHERE
         (p_id             IS NULL OR id         = p_id)
     AND (p_name           IS NULL OR name       LIKE CONCAT('%', p_name, '%'))
-    AND (p_email          IS NULL OR email      = p_email)
+    AND (p_address        IS NULL OR address    LIKE CONCAT('%', p_address, '%'))
+    AND (p_email          IS NULL OR email      LIKE CONCAT('%', p_email, '%'))
     AND (p_phone          IS NULL OR phone      = p_phone)
     AND (p_nif            IS NULL OR nif        = p_nif)
     AND (p_gender         IS NULL OR gender     = p_gender)
