@@ -9,7 +9,6 @@ CREATE PROCEDURE create_episode(
     IN p_oxygen     FLOAT,
     IN p_temp       FLOAT,
     IN p_breathing  FLOAT,
-    IN p_status     INT
 )
 BEGIN
 
@@ -54,6 +53,11 @@ BEGIN
         SET MESSAGE_TEXT = 'Breathing rate cannot be negative.';
     END IF;
 
+    -- STATUS ----------
+    DECLARE v_status INT;
+    SET v_status = fn_vitals_status(p_pulse, p_sistolic, p_diastolic, p_oxygen, p_temp, p_breathing);
+
+
     INSERT INTO Episode (
         patient_id,
         time,
@@ -74,7 +78,7 @@ BEGIN
         p_oxygen,
         p_temp,
         p_breathing,
-        p_status
+        v_status
     );
 
     SELECT *
