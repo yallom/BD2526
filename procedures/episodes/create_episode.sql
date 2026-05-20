@@ -1,0 +1,91 @@
+DELIMITER $$
+
+CREATE PROCEDURE create_episode(
+    IN p_patient_id INT,
+    IN p_time       DATETIME,
+    IN p_pulse      FLOAT,
+    IN p_sistolic   FLOAT,
+    IN p_diastolic  FLOAT,
+    IN p_oxygen     FLOAT,
+    IN p_temp       FLOAT,
+    IN p_breathing  FLOAT
+)
+BEGIN
+
+    DECLARE v_status INT;
+
+    IF p_patient_id IS NOT NULL AND NOT EXISTS (
+        SELECT 1
+        FROM Patient
+        WHERE id = p_patient_id
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Patient not found.';
+    END IF;
+
+    IF p_pulse IS NOT NULL AND p_pulse < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Pulse cannot be negative.';
+    END IF;
+
+    IF p_sistolic IS NOT NULL AND p_sistolic < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Systolic pressure cannot be negative.';
+    END IF;
+
+    IF p_diastolic IS NOT NULL AND p_diastolic < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Diastolic pressure cannot be negative.';
+    END IF;
+
+    IF p_oxygen IS NOT NULL 
+       AND (p_oxygen < 0 OR p_oxygen > 100) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Oxygen level must be between 0 and 100.';
+    END IF;
+
+    IF p_temp IS NOT NULL 
+       AND (p_temp < 20 OR p_temp > 50) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Temperature is outside acceptable range.';
+    END IF;
+
+    IF p_breathing IS NOT NULL AND p_breathing < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Breathing rate cannot be negative.';
+    END IF;
+
+    -- STATUS ----------
+    SET v_status = fn_vitals_status(p_pulse, p_sistolic, p_diastolic, p_oxygen, p_temp, p_breathing);
+
+
+    INSERT INTO Episode (
+        patient_id,
+        time,
+        pulse,
+        sistolic,
+        diastolic,
+        oxygen,
+        temp,
+        breathing,
+        status
+    )
+    VALUES (
+        p_patient_id,
+        p_time,
+        p_pulse,
+        p_sistolic,
+        p_diastolic,
+        p_oxygen,
+        p_temp,
+        p_breathing,
+        v_status
+    );
+
+    SELECT *
+    FROM Episode
+    WHERE id = LAST_INSERT_ID();
+
+END$$
+
+DELIMITER ;

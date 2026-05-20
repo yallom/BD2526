@@ -3,24 +3,31 @@ USE hospital_db;
 -- -----------------------------------------------------
 -- Patients
 -- -----------------------------------------------------
-INSERT INTO Patient (name, email, phone, nif, birthdate, gender, height, weight, blood_type, status) VALUES
-('Ana Sousa',       'ana.sousa@email.com',   '+351910000001', '123456789', '1985-03-12', 'female', 165, 60, 'A+',  1),
-('Carlos Ferreira', 'carlos.f@email.com',    '+351910000002', '234567890', '1972-07-24', 'male',   178, 85, 'O-',  1),
-('Maria Oliveira',  'maria.o@email.com',     '+351910000003', '345678901', '1990-11-05', 'female', 160, 55, 'B+',  0),
-('João Martins',    'joao.m@email.com',      '+351910000004', '456789012', '1965-01-30', 'male',   172, 90, 'AB+', 1),
-('Sofia Lopes',     'sofia.l@email.com',     '+351910000005', '567890123', '2000-06-18', 'female', 170, 65, 'O+',  1);
+INSERT INTO Patient (name, address, email, phone, nif, birthdate, gender, height, weight, blood_type, status) VALUES
+('Ana Sousa',       'Rua do Carmo', 'ana.sousa@email.com',   '+351910000001', '123456789', '1985-03-12', 'female', 165, 60, 'A+',  1),
+('Carlos Ferreira', 'Praça dos Touros','carlos.f@email.com',    '+351910000002', '234567890', '1972-07-24', 'male',   178, 85, 'O-',  1),
+('Maria Oliveira',  'Travessa da Onça','maria.o@email.com',     '+351910000003', '345678901', '1990-11-05', 'female', 160, 55, 'B+',  1),
+('João Martins',    'Rua D. José','joao.m@email.com',      '+351910000004', '456789012', '1965-01-30', 'male',   172, 90, 'AB+', 1),
+('Sofia Lopes',     'Avenida Gomes de Sá','sofia.l@email.com',     '+351910000005', '567890123', '2000-06-18', 'female', 170, 65, 'O+',  1);
 -- IDs will be 1..5
 
 -- -----------------------------------------------------
 -- Professionals
 -- -----------------------------------------------------
-INSERT INTO Professional (name, email, phone, type, specialty) VALUES
-('Dr. Rui Costa',      'rui.costa@hospital.com',  '+351920000001', 'doctor', 'cardiology'),
-('Dr. Inês Nunes',     'ines.nunes@hospital.com', '+351920000002', 'doctor', 'neurology'),
-('Enf. Pedro Gomes',   'pedro.g@hospital.com',    '+351920000003', 'nurse',  NULL),
-('Enf. Beatriz Silva', 'beatriz.s@hospital.com',  '+351920000004', 'nurse',  NULL),
-('Dr. Tiago Mendes',   'tiago.m@hospital.com',    '+351920000005', 'doctor', 'surgery');
+INSERT INTO Professional (name, phone, type, specialty) VALUES
+('Dr. Rui Costa',  '+351920000001', 'doctor', 'cardiology'),
+('Dr. Inês Nunes', '+351920000002', 'doctor', 'neurology'),
+('Enf. Pedro Gomes',    '+351920000003', 'nurse',  NULL),
+('Enf. Beatriz Silva',  '+351920000004', 'nurse',  NULL),
+('Dr. Tiago Mendes',    '+351920000005', 'doctor', 'surgery');
 -- IDs will be 1..5
+
+INSERT INTO Professional_Email (email, professional_id) VALUES
+('rui.costa@hospital.com', 1),
+('ines.nunes@hospital.com', 2),
+('pedro.g@hospital.com', 3),
+('beatriz.s@hospital.com', 4),
+('tiago.m@hospital.com', 5);
 
 -- -----------------------------------------------------
 -- Equipment
@@ -28,7 +35,7 @@ INSERT INTO Professional (name, email, phone, type, specialty) VALUES
 INSERT INTO Equipment (serial_number, brand, model, category, state, use_time, last_repair, next_repair) VALUES
 ('SN-001', 'Philips', 'MX450',    'monitor',    'available',   1200, '2025-01-10', '2026-01-10'),
 ('SN-002', 'GE',      'Optima',   'mri',        'available',   3400, '2025-03-15', '2026-03-15'),
-('SN-003', 'Siemens', 'SC7000',   'ventilator', 'maintenance',  800, '2025-06-01', '2026-06-01'),
+('SN-003', 'Siemens', 'SC7000',   'ventilator', 'available',  800, '2025-06-01', '2026-06-01'),
 ('SN-004', 'Mindray', 'DC-70',    'ultrasound', 'available',    500, '2025-09-20', '2026-09-20'),
 ('SN-005', 'Dräger',  'Infinity', 'monitor',    'available',   2100, '2025-11-05', '2026-11-05');
 -- IDs will be 1..5
@@ -36,12 +43,12 @@ INSERT INTO Equipment (serial_number, brand, model, category, state, use_time, l
 -- -----------------------------------------------------
 -- Locations
 -- -----------------------------------------------------
-INSERT INTO Location (number, floor, state) VALUES
-(101, 1, 'available'),
-(102, 1, 'available'),
-(201, 2, 'unavailable'),
-(202, 2, 'available'),
-(301, 3, 'maintenance');
+INSERT INTO Location (type, number, floor, state) VALUES
+('room', 101, 1, 'available'),
+('operating_room', 102, 1, 'available'),
+('emergency_room', 201, 2, 'available'),
+('examination_room', 202, 2, 'available'),
+('room', 301, 3, 'available');
 -- IDs will be 1..5
 
 -- -----------------------------------------------------
