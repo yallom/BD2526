@@ -24,7 +24,8 @@ CREATE TABLE Patient (
     PRIMARY KEY (id),
     UNIQUE (email),
     UNIQUE (phone),
-    UNIQUE (nif)
+    UNIQUE (nif),
+    CHECK (status BETWEEN 1 AND 5)
 );
 
 -- -----------------------------------------------------
@@ -86,7 +87,8 @@ CREATE TABLE Location (
     created_at	  DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at	  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at    DATETIME DEFAULT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE(floor, number)
 );
 
 -- -----------------------------------------------------
@@ -95,6 +97,8 @@ CREATE TABLE Location (
 CREATE TABLE Location_Patient (
     location_id     INT NOT NULL,
     patient_id  INT NOT NULL,
+    arrived_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	left_at DATETIME,
     PRIMARY KEY (location_id, patient_id),
     FOREIGN KEY (location_id)    REFERENCES Location(id)    ON DELETE CASCADE,
     FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE
@@ -158,7 +162,8 @@ CREATE TABLE Episode (
     updated_at	  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at    DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE SET NULL
+    FOREIGN KEY (patient_id) REFERENCES Patient(id) ON DELETE CASCADE,
+    CHECK (status BETWEEN 1 AND 5)
 );
 
 -- -----------------------------------------------------
