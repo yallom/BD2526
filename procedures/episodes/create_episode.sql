@@ -11,6 +11,7 @@ CREATE DEFINER='app_admin'@'localhost' PROCEDURE create_episode(
     IN p_breathing  FLOAT,
     IN p_status     INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF p_patient_id IS NOT NULL AND NOT EXISTS (
