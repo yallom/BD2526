@@ -3,12 +3,12 @@ USE hospital_db;
 -- -----------------------------------------------------
 -- Patients
 -- -----------------------------------------------------
-INSERT INTO Patient (name, email, phone, nif, birthdate, gender, height, weight, blood_type, status) VALUES
-('Ana Sousa',       'ana.sousa@email.com',   '+351910000001', '123456789', '1985-03-12', 'female', 165, 60, 'A+',  1),
-('Carlos Ferreira', 'carlos.f@email.com',    '+351910000002', '234567890', '1972-07-24', 'male',   178, 85, 'O-',  1),
-('Maria Oliveira',  'maria.o@email.com',     '+351910000003', '345678901', '1990-11-05', 'female', 160, 55, 'B+',  0),
-('João Martins',    'joao.m@email.com',      '+351910000004', '456789012', '1965-01-30', 'male',   172, 90, 'AB+', 1),
-('Sofia Lopes',     'sofia.l@email.com',     '+351910000005', '567890123', '2000-06-18', 'female', 170, 65, 'O+',  1);
+INSERT INTO Patient (name, address, email, phone, nif, birthdate, gender, height, weight, blood_type, status) VALUES
+('Ana Sousa',       'Rua do Carmo', 'ana.sousa@email.com',   '+351910000001', '123456789', '1985-03-12', 'female', 165, 60, 'A+',  1),
+('Carlos Ferreira', 'Praça dos Touros','carlos.f@email.com',    '+351910000002', '234567890', '1972-07-24', 'male',   178, 85, 'O-',  1),
+('Maria Oliveira',  'Travessa da Onça','maria.o@email.com',     '+351910000003', '345678901', '1990-11-05', 'female', 160, 55, 'B+',  0),
+('João Martins',    'Rua D. José','joao.m@email.com',      '+351910000004', '456789012', '1965-01-30', 'male',   172, 90, 'AB+', 1),
+('Sofia Lopes',     'Avenida Gomes de Sá','sofia.l@email.com',     '+351910000005', '567890123', '2000-06-18', 'female', 170, 65, 'O+',  1);
 -- IDs will be 1..5
 
 -- -----------------------------------------------------

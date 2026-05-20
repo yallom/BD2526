@@ -8,9 +8,10 @@ USE hospital_db;
 CREATE TABLE Patient (
     id            INT AUTO_INCREMENT  NOT NULL,
     name          VARCHAR(255) NOT NULL,
+    address       VARCHAR(255),
     email         VARCHAR(255),
     phone         VARCHAR(50),
-    nif           VARCHAR(20),
+    nif           VARCHAR(20) NOT NULL,
     birthdate     DATETIME,
     gender        ENUM('male', 'female') NOT NULL,
     height        INT,
