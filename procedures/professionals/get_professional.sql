@@ -10,16 +10,17 @@ CREATE PROCEDURE get_professional(
 )
 BEGIN
 
-    SELECT *
-    FROM Professional
+    SELECT p.*, pe.email
+    FROM Professional p
+    LEFT JOIN Professional_Email pe ON pe.professional_id = p.id 
     WHERE
-        (p_id         IS NULL OR id         = p_id)
-    AND (p_name       IS NULL OR name       LIKE CONCAT('%', p_name, '%'))
-    AND (p_email      IS NULL OR email      = p_email)
-    AND (p_phone      IS NULL OR phone      = p_phone)
-    AND (p_type       IS NULL OR type       = p_type)
-    AND (p_specialty  IS NULL OR specialty  = p_specialty);
+        (p_id         IS NULL OR p.id         = p_id)
+    AND (p_name       IS NULL OR p.name       LIKE CONCAT('%', p_name, '%'))
+    AND (p_phone      IS NULL OR p.phone      = p_phone)
+    AND (p_type       IS NULL OR p.type       = p_type)
+    AND (p_specialty  IS NULL OR p.specialty  = p_specialty)
+    AND (p_email	  IS NULL OR pe.email	  LIKE CONCAT('%', p_email, '%'));
 
 END$$
 
-DELIMITER ;
+DELIMITER ; 
