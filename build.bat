@@ -54,4 +54,16 @@ for /R views %%f in (*) do (
     echo. >> %OUTPUT%
 )
 
+echo -- ==================================== >> %OUTPUT%
+echo -- FUNCTIONS >> %OUTPUT%
+echo -- ==================================== >> %OUTPUT%
+
+for /R functions %%f in (*.sql) do (
+    echo. >> %OUTPUT%
+    echo -- FILE: %%f >> %OUTPUT%
+    echo. >> %OUTPUT%
+    type "%%f" >> %OUTPUT%
+    echo. >> %OUTPUT%
+)
+
 echo Generated %OUTPUT% successfully.
