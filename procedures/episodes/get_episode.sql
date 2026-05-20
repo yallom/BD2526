@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE get_episode(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE get_episode(
     IN p_id             INT,
     IN p_patient_id     INT,
     IN p_time_from      DATETIME,
@@ -13,6 +13,7 @@ CREATE PROCEDURE get_episode(
     IN p_temp           FLOAT,
     IN p_breathing      FLOAT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     SELECT *

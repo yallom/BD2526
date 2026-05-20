@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE create_episode(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE create_episode(
     IN p_patient_id INT,
     IN p_time       DATETIME,
     IN p_pulse      FLOAT,

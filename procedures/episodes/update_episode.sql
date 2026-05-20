@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE update_episode(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE update_episode(
     IN p_id          INT,
     IN p_patient_id  INT,
     IN p_time        DATETIME,
@@ -12,6 +12,7 @@ CREATE PROCEDURE update_episode(
     IN p_breathing   FLOAT,
     IN p_status      INT
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (

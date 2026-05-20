@@ -1,9 +1,10 @@
 DELIMITER $$
 
-CREATE PROCEDURE delete_episode(
+CREATE DEFINER='app_admin'@'localhost' PROCEDURE delete_episode(
     IN p_id   INT,
     IN p_hard BOOLEAN
 )
+SQL SECURITY DEFINER
 BEGIN
 
     IF NOT EXISTS (
