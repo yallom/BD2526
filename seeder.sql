@@ -14,13 +14,20 @@ INSERT INTO Patient (name, email, phone, nif, birthdate, gender, height, weight,
 -- -----------------------------------------------------
 -- Professionals
 -- -----------------------------------------------------
-INSERT INTO Professional (name, email, phone, type, specialty) VALUES
-('Dr. Rui Costa',      'rui.costa@hospital.com',  '+351920000001', 'doctor', 'cardiology'),
-('Dr. Inês Nunes',     'ines.nunes@hospital.com', '+351920000002', 'doctor', 'neurology'),
-('Enf. Pedro Gomes',   'pedro.g@hospital.com',    '+351920000003', 'nurse',  NULL),
-('Enf. Beatriz Silva', 'beatriz.s@hospital.com',  '+351920000004', 'nurse',  NULL),
-('Dr. Tiago Mendes',   'tiago.m@hospital.com',    '+351920000005', 'doctor', 'surgery');
+INSERT INTO Professional (name, phone, type, specialty) VALUES
+('Dr. Rui Costa',  '+351920000001', 'doctor', 'cardiology'),
+('Dr. Inês Nunes', '+351920000002', 'doctor', 'neurology'),
+('Enf. Pedro Gomes',    '+351920000003', 'nurse',  NULL),
+('Enf. Beatriz Silva',  '+351920000004', 'nurse',  NULL),
+('Dr. Tiago Mendes',    '+351920000005', 'doctor', 'surgery');
 -- IDs will be 1..5
+
+INSERT INTO Professional_Email (email, professional_id) VALUES
+('rui.costa@hospital.com', 1),
+('ines.nunes@hospital.com', 2),
+('pedro.g@hospital.com', 3),
+('beatriz.s@hospital.com', 4),
+('tiago.m@hospital.com', 5);
 
 -- -----------------------------------------------------
 -- Equipment
@@ -36,12 +43,12 @@ INSERT INTO Equipment (serial_number, brand, model, category, state, use_time, l
 -- -----------------------------------------------------
 -- Locations
 -- -----------------------------------------------------
-INSERT INTO Location (number, floor, state) VALUES
-(101, 1, 'available'),
-(102, 1, 'available'),
-(201, 2, 'available'),
-(202, 2, 'available'),
-(301, 3, 'available');
+INSERT INTO Location (type, number, floor, state) VALUES
+('room', 101, 1, 'available'),
+('operating_room', 102, 1, 'available'),
+('emergency_room', 201, 2, 'available'),
+('examination_room', 202, 2, 'available'),
+('room', 301, 3, 'available');
 -- IDs will be 1..5
 
 -- -----------------------------------------------------

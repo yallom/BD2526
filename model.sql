@@ -32,7 +32,6 @@ CREATE TABLE Patient (
 CREATE TABLE Professional (
     id            INT AUTO_INCREMENT  NOT NULL,
     name          VARCHAR(255) NOT NULL,
-    email         VARCHAR(255),
     phone         VARCHAR(50),
     type          VARCHAR(100),
     specialty     VARCHAR(100),
@@ -40,8 +39,18 @@ CREATE TABLE Professional (
     updated_at	  DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted_at    DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
-    UNIQUE (email),
     UNIQUE (phone)
+);
+
+-- -----------------------------------------------------
+-- Table: Professional Email
+-- -----------------------------------------------------
+
+CREATE TABLE Professional_Email (
+    email               VARCHAR(255) NOT NULL,
+    professional_id     INT NOT NULL,
+    PRIMARY KEY (email),
+    FOREIGN KEY (professional_id) REFERENCES Professional(id) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -69,7 +78,7 @@ CREATE TABLE Equipment (
 -- -----------------------------------------------------
 CREATE TABLE Location (
     id      INT AUTO_INCREMENT NOT NULL,
-    type    ENUM('room','operating_room','emergency','examination')
+    type    ENUM('room','operating_room','emergency_room','examination_room'),
     number  INT,
     floor   INT,
     state   ENUM('available', 'unavailable', 'maintenance', 'inoperable') NOT NULL,
