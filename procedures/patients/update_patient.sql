@@ -2,6 +2,7 @@ DELIMITER $$
 CREATE PROCEDURE update_patient(
     IN p_id         INT,
     IN p_name       VARCHAR(255),
+    IN p_address    VARCHAR(255),
     IN p_email      VARCHAR(255),
     IN p_phone      VARCHAR(50),
     IN p_nif        VARCHAR(20),
@@ -53,6 +54,7 @@ BEGIN
     -- Update only provided fields (COALESCE keeps the old value if NULL is passed)
     UPDATE Patient SET
         name       = COALESCE(p_name,       name),
+        address    = COALESCE(p_address,    address),
         email      = COALESCE(p_email,      email),
         phone      = COALESCE(p_phone,      phone),
         nif        = COALESCE(p_nif,        nif),
