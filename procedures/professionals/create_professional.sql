@@ -2,7 +2,6 @@ DELIMITER $$
 
 CREATE PROCEDURE create_professional(
     IN p_name       VARCHAR(255),
-    IN p_email      VARCHAR(255),
     IN p_phone      VARCHAR(50),
     IN p_type       VARCHAR(100),
     IN p_specialty  VARCHAR(100)
@@ -19,12 +18,6 @@ BEGIN
         SET MESSAGE_TEXT = 'Professional type is required.';
     END IF;
 
-    IF p_email IS NOT NULL 
-       AND p_email NOT REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$' THEN
-        SIGNAL SQLSTATE '45000' 
-        SET MESSAGE_TEXT = 'E-mail format invalid.';
-    END IF;
-
     IF p_phone IS NOT NULL 
        AND p_phone NOT REGEXP '^[0-9]{9}$' THEN
         SIGNAL SQLSTATE '45000' 
@@ -33,14 +26,12 @@ BEGIN
 
     INSERT INTO Professional (
         name,
-        email,
         phone,
         type,
         specialty
     )
     VALUES (
         p_name,
-        p_email,
         p_phone,
         p_type,
         p_specialty
