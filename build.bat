@@ -24,6 +24,18 @@ for /R functions %%f in (*.sql) do (
 )
 
 echo -- ==================================== >> %OUTPUT%
+echo -- UTILS >> %OUTPUT%
+echo -- ==================================== >> %OUTPUT%
+
+for /R utils %%f in (*.sql) do (
+    echo. >> %OUTPUT%
+    echo -- FILE: %%f >> %OUTPUT%
+    echo. >> %OUTPUT%
+    type "%%f" >> %OUTPUT%
+    echo. >> %OUTPUT%
+)
+
+echo -- ==================================== >> %OUTPUT%
 echo -- TRIGGERS >> %OUTPUT%
 echo -- ==================================== >> %OUTPUT%
 
