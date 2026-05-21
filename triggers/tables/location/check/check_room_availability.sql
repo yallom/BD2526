@@ -1,5 +1,3 @@
--- FILE: triggers\relational\location_patient_capacity.sql
-
 DELIMITER $$
 
 CREATE TRIGGER check_room_availability
