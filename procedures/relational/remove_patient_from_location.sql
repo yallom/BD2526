@@ -16,10 +16,8 @@ BEGIN
         SET MESSAGE_TEXT = 'Relation not found.';
     END IF;
 
-    DELETE
-    FROM Location_Patient
-    WHERE location_id = p_location_id
-    AND patient_id = p_patient_id;
+    UPDATE Location_Patient
+    SET left_at = NOW() WHERE location_id = p_location_id AND patient_id = p_patient_id;
 
 END$$
 
