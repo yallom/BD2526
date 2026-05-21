@@ -26,8 +26,9 @@ BEGIN
       AND left_at IS NULL;
 
     IF loc_count >= loc_capacity THEN
+        SET v_msg = CONCAT('Location ', NEW.location_id, ' has reached max capacity!');
         INSERT INTO Alert(entity_type, entity_id, reason, message)
-        VALUES ('Location', NEW.location_id, 'full', CONCAT('Location ', NEW.location_id, ' has reached max capacity!'))
+        VALUES ('location', NEW.location_id, 'full', v_msg);
     END IF;
 
 END$$
