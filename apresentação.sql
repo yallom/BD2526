@@ -194,3 +194,13 @@ SELECT * FROM vw_archived_locations;
 
 SELECT * FROM vw_location_occupancy WHERE location_id = 1;
 
+
+-- Alocação automática de pacientes a um quarto disponível
+
+SELECT * FROM vw_location_occupancy WHERE location_id = 4;
+
+CALL vacate_location(4);
+
+SELECT * FROM vw_location_occupancy WHERE location_id = 4;
+
+SELECT * FROM vw_location_occupancy WHERE patient_id in (4,5);
