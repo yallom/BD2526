@@ -7,6 +7,7 @@ BEGIN
     DECLARE loc_type     ENUM('room','operating_room','emergency_room','examination_room');
     DECLARE loc_capacity INT;
     DECLARE loc_count    INT;
+    DECLARE v_msg        VARCHAR(255);
 
     SELECT type INTO loc_type
     FROM Location
@@ -25,8 +26,9 @@ BEGIN
       AND left_at IS NULL;
 
     IF loc_count >= loc_capacity THEN
+        SET v_msg = CONCAT('Cannot assign patient: location has reached maximum capacity (', loc_capacity, ').');
         SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = CONCAT('Cannot assign patient: location has reached maximum capacity (', loc_capacity, ').');
+            SET MESSAGE_TEXT = v_msg;
     END IF;
 
 END$$
